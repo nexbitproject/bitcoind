@@ -1,5 +1,4 @@
 FROM alpine
-LABEL MAINTAINER="T. Rahaman <developer@nexbit.io>"
 
 ARG VERSION=0.17.1
 ARG GLIBC_VERSION=2.29-r0
@@ -7,8 +6,6 @@ ARG GLIBC_VERSION=2.29-r0
 ENV FILENAME bitcoin-${VERSION}-x86_64-linux-gnu.tar.gz
 ENV DOWNLOAD_URL https://bitcoin.org/bin/bitcoin-core-${VERSION}/${FILENAME}
 
-# Some of this was unabashadly yanked from
-# https://github.com/szyhf/DIDockerfiles/blob/master/bitcoin/alpine/Dockerfile
 
 RUN apk update \
   && apk --no-cache add wget tar bash ca-certificates \

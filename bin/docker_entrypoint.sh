@@ -30,18 +30,16 @@ rpcpassword=${BTC_RPCPASSWORD:-changemeplz}
 rpcclienttimeout=${BTC_RPCCLIENTTIMEOUT:-30}
 
 rpcallowip=${BTC_RPCALLOWIP:-::/0}
-rpcallowip=${BTC_RPCALLOWIP:-::/0}
-rpcallowip=${BTC_RPCALLOWIP:-::/0}
-
 
 # Listen for RPC connections on this TCP port:
 rpcport=${BTC_RPCPORT:-8332}
-rpcbind=127.0.0.1
+
 # Print to console (stdout) so that "docker logs bitcoind" prints useful
 # information.
 printtoconsole=${BTC_PRINTTOCONSOLE:-1}
 
-
+# We probably don't want a wallet.
+disablewallet=${BTC_DISABLEWALLET:-0}
 
 # Enable an on-disk txn index. Allows use of getrawtransaction for txns not in
 # mempool.
@@ -52,13 +50,6 @@ testnet=${BTC_TESTNET:-0}
 
 # Set database cache size in MiB
 dbcache=${BTC_DBCACHE:-512}
-
-prune=5000
-maxmempool=150
-maxreceivebuffer=2500
-maxsendbuffer=500
-
-
 
 # ZeroMQ notification options:
 zmqpubrawblock=${BTC_ZMQPUBRAWBLOCK:-tcp://0.0.0.0:28333}
