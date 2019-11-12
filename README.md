@@ -29,10 +29,8 @@ $ docker run --name bitcoind -d \
    -p 127.0.0.1:8332:8332 \
    --publish 8333:8333 \
    nexbitio/bitcoind
-
-$ docker logs -f bitcoind
-[ ... ]
 ```
+
 
 
 ## Configuration
@@ -58,38 +56,6 @@ on environment variables passed to the container:
 | BTC_ZMQPUBRAWBLOCK | tcp://0.0.0.0:28333 |
 
 
-## Daemonizing
-
-The smart thing to do if you're daemonizing is to use Docker's [builtin
-restart
-policies](https://docs.docker.com/config/containers/start-containers-automatically/#use-a-restart-policy),
-but if you're insistent on using systemd, you could do something like
-
-```bash
-$ cat /etc/systemd/system/bitcoind.service
-
-# bitcoind.service #######################################################################
-[Unit]
-Description=Bitcoind
-After=docker.service
-Requires=docker.service
-
-[Service]
-ExecStartPre=-/usr/bin/docker kill bitcoind
-ExecStartPre=-/usr/bin/docker rm bitcoind
-ExecStartPre=/usr/bin/docker pull nexbitio/bitcoind
-ExecStart=/usr/bin/docker run \
-    --name bitcoind \
-    -p 8333:8333 \
-    -p 127.0.0.1:8332:8332 \
-    -v /data/bitcoind:/root/.bitcoin \
-    nexbitio/bitcoind
-ExecStop=/usr/bin/docker stop bitcoind
-```
-
-to ensure that bitcoind continues to run.
-
-to ensure that bitcoind continues to run.
 
 
 https://nexbit.io
